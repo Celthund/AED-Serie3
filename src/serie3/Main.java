@@ -93,8 +93,7 @@ public class Main {
                 // Same for the end vertex
                 Vertex end = graph.getVertex(id2);
 
-                // FIFO queue to be used on the BFS search
-                QueueArray<Vertex> bfs = new QueueArray<>(dim);
+
 
                 // Cycle to reset all the vertex by putting all the colors white, the distances
                 //smallestDistances to the Integer.MAX_VALUE (infinite), and the predecessor
@@ -110,14 +109,17 @@ public class Main {
                 start.smallestDistance = 0;
                 start.color = Vertex.Colors.GRAY;
 
+                // FIFO queue to be used on the BFS search
+//                QueueArray<Vertex> bfs = new QueueArray<>(dim);
+                Heap<Vertex> bfs = new Heap<>(new Vertex.VertexComparator());
                 // Puts the start variable in the FIFO queue
-                bfs.enqueue(start);
+                bfs.add(start);
 
                 // Runs from the start variable to the end variable(if the path exists)
-                while (!bfs.isEmpty() && end.color != Vertex.Colors.BLACK) {
+                while (!bfs.isEmpty() && !(curr == end)) {
 
                     // Gets the last Vertex inserted from the queue
-                    curr = bfs.dequeue();
+                    curr = bfs.poll();
 
                     // Cycle that gets all the vertex adjacents to the current vertex
                     for (Map.Entry<Vertex, Integer> entry : curr.adjacentVertex.entrySet()) {
@@ -128,9 +130,9 @@ public class Main {
                         //cover at that point, and the predecessor is the 'curr' vertex
                         if (adj.color == Vertex.Colors.WHITE) {
                             adj.color = Vertex.Colors.GRAY;
-                            bfs.enqueue(adj);
                             adj.smallestDistance = curr.smallestDistance + entry.getValue();
                             adj.predecessor = curr;
+                            bfs.add(adj);
                         }
 
                         // If its Gray its already visited so it will compare the "old" path
@@ -139,10 +141,10 @@ public class Main {
 
                             // If the smallestDistance stored in the array is smaller than the current distance it has ran
                             //so far than it will store the new distance
-                            if (adj.smallestDistance >
-                                    (curr.smallestDistance + entry.getValue())) {
+                            if (adj.smallestDistance > (curr.smallestDistance + entry.getValue())) {
                                 adj.smallestDistance = curr.smallestDistance + entry.getValue();
                                 adj.predecessor = curr;
+                                bfs.heapify();
                             }
                         }
 

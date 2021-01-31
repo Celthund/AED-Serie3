@@ -1,3 +1,5 @@
+package serie3;
+
 public class NodeHandler {
     private static int count;
 

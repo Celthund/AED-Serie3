@@ -1,30 +1,17 @@
 package serie3;
 
-import javafx.util.Pair;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Main {
+import java.util.HashMap;
 
-    public static void main(String[] args) {
+public class NodeHandlerTest {
+    Node nodeTree1 = createNode1();
+    Node nodeTree2 = createNode2();
 
-        Pair<Integer, Integer> a = new Pair<>(1,2), b = new Pair<>(a.getValue(),a.getKey());
-
-        Pair<Integer, Integer> c = new Pair<>(1,2);
-        System.out.println(a);
-        System.out.println(b);
-        System.out.println(a.equals(c) || b.equals(c));
-        Node nodeTree1 = createNode1();
-        Node nodeTree2 = createNode2();
-        int k = 2;
-
-        System.out.println("O nodeTree1 tem " + NodeHandler.countMultiple(nodeTree1, k) + " multiplos de "+ k);
-        System.out.println("O nodeTree2 tem " + NodeHandler.countMultiple(nodeTree2, k) + " multiplos de "+ k);
-
-        System.out.println("\nO nodeTree1 " + k + " numero mais pequeno é " + NodeHandler.kSmallest(nodeTree1, k));
-        System.out.println("O nodeTree2 " + k + " numero mais pequeno é " + NodeHandler.kSmallest(nodeTree2, k));
-
-        System.out.println("\nA a arvore nodeTree1 é: " + ((NodeHandler.isBalanced(nodeTree1)) ? "Balanceada" : "Nao Balanceada"));
-        System.out.println("A a arvore nodeTree2 é: " + ((NodeHandler.isBalanced(nodeTree2)) ? "Balanceada" : "Nao Balanceada"));
-
+    @Test
+    public void filterByMap_withEmptySequences(){
+        assertEquals(NodeHandler.countMultiple(nodeTree1, 2), 9);
     }
 
 

@@ -1,3 +1,5 @@
+package serie3;
+
 import java.util.HashMap;
 
 public class DNACollection {
@@ -7,7 +9,7 @@ public class DNACollection {
         public Node(){}
     }
     Node root;
-    final HashMap<Character, Integer> char_position = new HashMap<>(){{
+    final HashMap<Character, Integer> char_position = new HashMap<Character, Integer>(){{
         put('A', 0);
         put('C', 1);
         put('T', 2);

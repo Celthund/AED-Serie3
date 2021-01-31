@@ -211,15 +211,20 @@ public class Main {
                 dim = Integer.parseInt(curr[4]);
             }
 
-            // When 'v' it's the first letter of the line it means that we have
+            // When 'v' it's the first letter of the line it means that we are in a line with vertex
             else if (!curr[0].equals("v")) {
                 continue;
             }
+
+            // We add that vertex to the graph, the id is always on the second position(1) the x on the third
+            //position(2) and the y on the third position(4)
             else {
                 Vertex vertex = new Vertex(Integer.parseInt(curr[1]), Integer.parseInt(curr[2]), Integer.parseInt(curr[3]));
                 graph.addVertex(vertex.id, vertex);
             }
         }
+
+        // Returns the graph to be used on the search
         return graph;
     }
 
@@ -231,55 +236,21 @@ public class Main {
             // Separates the lines every time it encounters a space character
             curr = scanner.nextLine().split(" ");
 
+            // While it didn't find the letter 'a' it means the line doesn't contain information
+            //about the vertex
             if (!curr[0].equals("a")) {
                 continue;
             }
 
+            // Connects the start vertex (id is in the position 1 of the line)
+            //to the end vertex (id is in the position 2 of the line)
+            //the distance between the 2 vertice is in the position 3 of the line
+
+            // (The Position is seperated by spaces as for the curr array)
             Vertex start = graph.getVertex(Integer.parseInt(curr[1]));
             Vertex finish = graph.getVertex(Integer.parseInt(curr[2]));
             int distance = Integer.parseInt(curr[3]);
             start.addDestination(finish, distance);
-
         }
-    }
-
-
-    public static Node createNode2(){
-        Node nodeTree = null;
-
-        nodeTree = NodeHandler.insert(nodeTree, 9);
-        nodeTree = NodeHandler.insert(nodeTree, 4);
-        nodeTree = NodeHandler.insert(nodeTree, 1);
-        nodeTree = NodeHandler.insert(nodeTree, 8);
-        nodeTree = NodeHandler.insert(nodeTree, 5);
-        nodeTree = NodeHandler.insert(nodeTree, 6);
-        nodeTree = NodeHandler.insert(nodeTree, 7);
-        nodeTree = NodeHandler.insert(nodeTree, 0);
-        nodeTree = NodeHandler.insert(nodeTree, 2);
-        nodeTree = NodeHandler.insert(nodeTree, 3);
-
-        return nodeTree;
-    }
-
-    public static Node createNode1(){
-        Node nodeTree = null;
-
-        nodeTree = NodeHandler.insert(nodeTree, 10);
-        nodeTree = NodeHandler.insert(nodeTree, 6);
-        nodeTree = NodeHandler.insert(nodeTree, 4);
-        nodeTree = NodeHandler.insert(nodeTree, 3);
-        nodeTree = NodeHandler.insert(nodeTree, 5);
-        nodeTree = NodeHandler.insert(nodeTree, 8);
-        nodeTree = NodeHandler.insert(nodeTree, 7);
-        nodeTree = NodeHandler.insert(nodeTree, 9);
-        nodeTree = NodeHandler.insert(nodeTree, 18);
-        nodeTree = NodeHandler.insert(nodeTree, 14);
-        nodeTree = NodeHandler.insert(nodeTree, 12);
-        nodeTree = NodeHandler.insert(nodeTree, 15);
-        nodeTree = NodeHandler.insert(nodeTree, 20);
-        nodeTree = NodeHandler.insert(nodeTree, 19);
-        nodeTree = NodeHandler.insert(nodeTree, 32);
-
-        return nodeTree;
     }
 }

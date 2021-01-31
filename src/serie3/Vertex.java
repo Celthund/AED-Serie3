@@ -11,8 +11,8 @@ public class Vertex {
     }
 
     public Vertex predecessor;
-    public int id, smallestDistance = Integer.MAX_VALUE, x, y;
-    public Colors color = Colors.WHITE;
+    public int id, smallestDistance, x, y;
+    public Colors color;
     public HashMap<Vertex, Integer> adjacentVertex = new HashMap<>();
 
     public Vertex(int id){

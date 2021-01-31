@@ -3,7 +3,9 @@ package serie3;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class NodeHandlerTest {
     Node nodeTree1 = createNode1();
@@ -12,6 +14,13 @@ public class NodeHandlerTest {
     @Test
     public void filterByMap_withEmptySequences(){
         assertEquals(NodeHandler.countMultiple(nodeTree1, 2), 9);
+    }
+    @Test
+    public void filterByMap_withRandomElements() {
+        List<Integer> list = Arrays.asList(1, 18);
+        Random rand = new Random();
+        int randomElements = list.get(rand.nextInt(list.size()));
+        assertEquals(NodeHandler.countMultiple(nodeTree1, randomElements), randomElements);
     }
 
 

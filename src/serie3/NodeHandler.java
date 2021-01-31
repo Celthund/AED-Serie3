@@ -14,12 +14,11 @@ public class NodeHandler {
     }
 
 
-
-    public static Integer kSmallest(Node<Integer> root, int k){
+    public static Integer kSmallest(Node<Integer> root, int k) {
         count = 0;
-
         return kSmallestRecursive(root, k);
     }
+
     public static Integer kSmallestRecursive(Node<Integer> root, int k) {
         Integer checker;
 
@@ -41,15 +40,15 @@ public class NodeHandler {
 
     }
 
-    public static int countMultiple(Node<Integer> root, Integer k){
+    public static int countMultiple(Node<Integer> root, Integer k) {
         int count = 0;
-        if(root == null)
+        if (root == null)
             return count;
 
         count = countMultiple(root.left, k);
         count += countMultiple(root.right, k);
 
-        if(root.value % k == 0)
+        if (root.value % k == 0)
             count++;
 
         return count;
@@ -57,21 +56,21 @@ public class NodeHandler {
     }
 
 
-    public static <E> boolean isBalanced(Node<E> root){
-        if(root == null)
+    public static <E> boolean isBalanced(Node<E> root) {
+        if (root == null)
             return true;
 
         int leftHeight = height(root.left), rightHeight = height(root.right);
 
-        if(Math.abs(leftHeight - rightHeight) == 0 && isBalanced(root.left) && isBalanced(root.right))
+        if (Math.abs(leftHeight - rightHeight) <= 1 && isBalanced(root.left) && isBalanced(root.right))
             return true;
 
         return false;
 
     }
 
-    private static <E> int height(Node<E> root){
-        if(root == null)
+    private static <E> int height(Node<E> root) {
+        if (root == null)
             return 0;
 
         return 1 + Math.max(height(root.left), height(root.right));

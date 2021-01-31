@@ -1,9 +1,14 @@
 package serie3;
 
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 public class Vertex {
+    static class VertexComparator implements Comparator<Vertex> {
+        public int compare(Vertex s1, Vertex s2) {
+            return s1.smallestDistance - s2.smallestDistance;
+        }
+    }
     public enum Colors {
         WHITE, // Not visited
         GRAY,  // Visited but all the adjacent vertex where not visited
@@ -14,10 +19,6 @@ public class Vertex {
     public int id, smallestDistance = Integer.MAX_VALUE, x, y;
     public Colors color = Colors.WHITE;
     public HashMap<Vertex, Integer> adjacentVertex = new HashMap<>();
-
-    public Vertex(int id){
-        this.id = id;
-    }
 
     public Vertex(int id, int x, int y){
         this.id = id;

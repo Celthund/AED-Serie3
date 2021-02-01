@@ -10,7 +10,6 @@ public class Main {
     private static int dim;
 
     public static void main(String[] args) {
-        double start_time = nanoTime() * 1e-6;
         // If args.length is less than 1 it means that is empty so returns a warning and exits the program
         if (args.length < 1) {
             System.out.println("Missing operation.");
@@ -52,11 +51,15 @@ public class Main {
             System.exit(-1);
         }
 
+        double start_time = nanoTime() * 1e-6;
+
         // Creates the graph by reading the '.co'
         Graph graph = createGraph(scanner2);
-
         // Connects the vertex of the graph previously created
         connectVertices(scanner1, graph);
+
+        double end_time = nanoTime() * 1e-6;
+        System.out.printf("Time loading the graph = %.2f\n", end_time - start_time);
 
         while(true) {
             // Set of intructions to ask the user what set of operations he intends to execute
@@ -82,7 +85,7 @@ public class Main {
                         validInputs = true;
                 }
 
-
+                start_time = nanoTime() * 1e-6;
                 // Gets the starter vertex via the id the user inputted in the id1
                 Vertex start = graph.getVertex(id1);
 
@@ -187,6 +190,9 @@ public class Main {
                         System.out.println();
                     }
                 }
+
+                end_time = nanoTime() * 1e-6;
+                System.out.printf("Time calculating the shortest path = %.2f\n", end_time - start_time);
             }
             else if (operation.equals("e"))
                 break;

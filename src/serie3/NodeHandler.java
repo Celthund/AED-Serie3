@@ -1,7 +1,8 @@
 package serie3;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class NodeHandler {
-    private static int count;
 
     // Inserts the nodes onto the BinaryTree
     public static <E extends Comparable<E>> Node<E> insert(Node<E> root, E e) {
@@ -18,35 +19,31 @@ public class NodeHandler {
 
     public static Integer kSmallest(Node<Integer> root, int k){
         // Counts the nth smallest position its currently in
-        count = 0;
-
         // Iterative calls the tree to see the kth smallest element(if it exists)
-        return kSmallestRecursive(root, k);
+        AtomicInteger counter = new AtomicInteger(k);
+
+        return kSmallestRecursive(root, counter);
     }
 
-    public static Integer kSmallestRecursive(Node<Integer> root, int k) {
-        Integer checker;
-
+    public static Integer kSmallestRecursive(Node<Integer> root, AtomicInteger k) {
         if (root == null)
             return null;
-
         // Stores the value of the current node its in
-        checker = kSmallestRecursive(root.left, k);
+        Integer ret = kSmallestRecursive(root.left, k);
 
         // Found the kth smallest element
-        if (checker != null)
-            return checker;
+        if (ret != null)
+            return ret;
 
         // Counts the elements its in
-        count++;
 
         // Return the value when it has found the kth element
-        if (count == k)
+        if (k.decrementAndGet() == 0)
             return root.value;
 
-
+        ret = kSmallestRecursive(root.right, k);
         // Checks the right side of the root
-        return kSmallestRecursive(root.right, k);
+        return ret;
 
     }
 
@@ -54,7 +51,7 @@ public class NodeHandler {
         // Counts the multiples of k
         int count = 0;
         if (root == null)
-            return count;
+            return 0;
 
         // Counts how many it exists on the left side
         count = countMultiple(root.left, k);

@@ -9,6 +9,7 @@ public class DNACollection {
         Node[] children = new Node[4];
         public Node(){}
     }
+
     Node root;
     final HashMap<Character, Integer> char_position = new HashMap<Character, Integer>(){{
         put('A', 0);
@@ -38,7 +39,7 @@ public class DNACollection {
     }
 
     public int prefixCount(String prefix){
-        int count = 0, i;
+        int i;
         Node curr = root;
         char c;
         for (i = 0; i < prefix.length(); i++){
@@ -50,11 +51,7 @@ public class DNACollection {
                 break;
             }
         }
-        if (curr == null) return count;
-        for (Node node: curr.children){
-            count += count(node);
-        }
-        return curr.flag ? ++count : count;
+        return count(curr);
     }
 
     public int count(Node root){
